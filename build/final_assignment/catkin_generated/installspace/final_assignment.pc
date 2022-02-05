@@ -1,0 +1,8 @@
+prefix=/home/tachadol/Y1-S1/RT/RT1_assignment3/rt1_as3_ws/install
+
+Name: final_assignment
+Description: Description of final_assignment
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
