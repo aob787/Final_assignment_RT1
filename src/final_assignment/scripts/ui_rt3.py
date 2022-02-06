@@ -13,6 +13,7 @@ import time
 #Parameters
 obstacle_detection_range = 1
 
+#Init. global varibales
 srv_activate_goto_ = None
 mode_ = 0
 sub_laser_ = None
@@ -21,6 +22,7 @@ pub_cmd_vel_ =None
 able_to_move_ = [0, 0, 0, 0, 0] #% array including right fringht front fleft and left
 vel_msg = Twist()
 
+#function for check obstrucal
 def check_obstruc(regions, key, index):
     global able_to_move_
     if regions[key] > obstacle_detection_range :
@@ -58,7 +60,7 @@ def clbk_laser(msg): #this part of function was obtianed from obstacle_avoidance
         vel_msg.angular.z = 0
     pub_cmd_vel_.publish(vel_msg)
 
-
+#callback function when recieve msg for keyboard input
 def clbk_twist_kb(msg):
     global  mode_
     global sub_laser_, sub_cmd_vel_kb_, vel_msg_, pub_cmd_vel_, vel_msg
@@ -122,17 +124,21 @@ def main():
     time.sleep(2)
     rospy.init_node('main_rt3')
 
+    #sub and pub init
     sub_laser_ = rospy.Subscriber('/scan', LaserScan, clbk_laser)
     sub_cmd_vel_kb_ = rospy.Subscriber("/cmd_vel_kb", Twist, clbk_twist_kb)
     pub_cmd_vel_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
     global srv_activate_goto_, srv_activate_kb_control_, srv_activate_auto_avoiding_
+    #service for activate goto node
     srv_activate_goto_ = rospy.ServiceProxy('/activate_goto', SetBool)
 
     while not rospy.is_shutdown():
+        #we need to use try incase of user input non numberical number
         try:
             mode_ = int(input("Please input the mode of robot"))
             print ("Mode of robot: " + str(mode_))
+            #For switching mode
             if mode_ == int(1):
                 sub_laser_.unregister()
                 a = float(input("new x position:"))
