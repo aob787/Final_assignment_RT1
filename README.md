@@ -6,10 +6,18 @@ Some parts of respiratory was retrived from https://github.com/CarmineD8/final_a
 Tasks
 --------------------
 -Building the software for recieving the co-ordinate and nagivate robot
+
 -Building the software to control the robot via keyboard with/without assistance to avoid collisions
 
 Installing and running
 ----------------------
+Require package: ros navigation stack and teleop_twist_keyboard
+Also required xterm
+'''shell
+sudo apt update
+sudo apt install xterm
+'''
+
 To run you need to build/complie first using
 ```Shell
 catkin_make
@@ -20,7 +28,7 @@ roscore
 rosluanch final_assignment final_assignment.launch
 ```
 
-or in case of haveing trobles with x-term
+or in case of having trobles with x-term
 
 ```Shell
 roscore
