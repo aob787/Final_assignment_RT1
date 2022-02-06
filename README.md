@@ -1,7 +1,7 @@
 Final assignment - Research Track 1
 ================================
 
-This respiratory was retrived from https://github.com/CarmineD8/final_assignment and https://github.com/CarmineD8/slam_gmapping
+Some parts of respiratory was retrived from https://github.com/CarmineD8/final_assignment and https://github.com/CarmineD8/slam_gmapping
 
 Tasks
 --------------------
