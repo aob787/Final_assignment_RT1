@@ -13,10 +13,11 @@ import actionlib
 
 import math
 
-
+#init global variables
 activate_= False
 client_ = None
 
+#Callback function when service was requested
 def go_to_switch(req):
     global activate_
     activate_ = req.data
@@ -27,6 +28,7 @@ def go_to_switch(req):
     res.message = 'Done!'
     return res
 
+#Callback function for move_base
 def done_cb(status, result):
 # Reference for terminal status values: http://docs.ros.org/diamondback/api/actionlib_msgs/html/msg/GoalStatus.html
     if status == 2:
@@ -47,9 +49,10 @@ def main():
     rospy.init_node('goto_pos_rt3')
     ##https://answers.ros.org/question/316592/problem-when-publishing-to-move_basegoal/
     #http://wiki.ros.org/navigation/Tutorials/SendingSimpleGoals
+    #init client
     client_ = actionlib.SimpleActionClient('move_base', MoveBaseAction)
     client_.wait_for_server()
-
+    #init service 
     srv = rospy.Service('activate_goto', SetBool, go_to_switch)
 
 
